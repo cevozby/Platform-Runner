@@ -65,9 +65,4 @@ public class PlayerMovement : MonoBehaviour
         playerAnim.SetBool("isGame", isGame);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
-
 }
