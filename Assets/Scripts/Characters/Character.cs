@@ -37,7 +37,6 @@ public class Character : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             Finish();
-            //GameControl.instance.level++;
         }
     }
 
@@ -63,7 +62,6 @@ public class Character : MonoBehaviour
     public void Push(float force, Vector3 dir)
     {
         characterRB.AddForce(dir * force, ForceMode.Impulse);
-        Debug.Log("Push");
     }
 
     public void Bounce(float force, int dir)

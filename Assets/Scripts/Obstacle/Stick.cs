@@ -10,7 +10,6 @@ public class Stick : MonoBehaviour
         {
             Character push = collision.gameObject.GetComponent<Character>();
             push.Push(force, transform.forward);
-            Debug.Log("Temas etti: " + collision.gameObject.name);
         }
     }
 
