@@ -58,12 +58,12 @@ public class Character : MonoBehaviour
     {
         StartCoroutine(ResetTimer());
     }
-
+    //Push the character
     public void Push(float force, Vector3 dir)
     {
         characterRB.AddForce(dir * force, ForceMode.Impulse);
     }
-
+    //Push the character
     public void Bounce(float force, int dir)
     {
         characterRB.AddForce(Vector3.right * force * dir);

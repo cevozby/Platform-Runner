@@ -57,7 +57,7 @@ public class HalfDonut : MonoBehaviour
             target = startPos;
         }
     }
-
+    //When collide any character, take its script and call the function
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))

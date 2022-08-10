@@ -41,6 +41,7 @@ public class Opponent : Character
         
         Movement();
         Anim();
+        //If opponent see any obstacle, call function
         if(obstacle != null)
         {
             Obstacle(staticXPos);
@@ -74,6 +75,7 @@ public class Opponent : Character
 
     void Movement()
     {
+        //Whenever the opponent approaches the edge of the ground, stop it.
         if (transform.position.x > 0.86f || transform.position.x < -0.86f)
         {
             horizontal = 0f;
@@ -122,6 +124,7 @@ public class Opponent : Character
         right = false;
     }
 
+    //Give obstacle information and calculate which route is better
     #region StaticObstacle
     float ObstaclePos()
     {

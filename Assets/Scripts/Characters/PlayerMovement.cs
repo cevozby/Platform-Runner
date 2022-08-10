@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //When click the button first, game start and character move
         if (Input.GetMouseButtonDown(0) && !GameControl.instance.isEnd)
         {
             GameControl.instance.isGame = true;
@@ -37,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
         
         if (GameControl.instance.isGame && !GameControl.instance.isEnd)
         {
+            //When player click anywhere, take mouse input and
+            //if the character is to the left it moves to the right,
+            //if to the right it moves to the left
             if (Input.GetMouseButton(0))
             {
                 Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 5f));
