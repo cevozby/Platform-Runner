@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,26 +8,25 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerRB;
     [SerializeField] Animator playerAnim;
 
-    public static bool isGame;
-
     Vector3 horizontal, vertical, direction;
+
 
     // Start is called before the first frame update
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
-        //playerAnim = GetComponent<Animator>();
-        isGame = false;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !GameControl.instance.isEnd)
         {
-            isGame = true;
+            GameControl.instance.isGame = true;
             vertical = Vector3.forward;
         }
+        
         Movement();
         Anim();
     }
@@ -38,31 +35,52 @@ public class PlayerMovement : MonoBehaviour
     void Movement()
     {
         
-        if (isGame)
+        if (GameControl.instance.isGame && !GameControl.instance.isEnd)
         {
-            playerRB.velocity = Vector3.forward * speed * Time.deltaTime;
-            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 5f));
-            if(Mathf.Abs(transform.position.x - mouse.x) <= 0.2f)
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(0, 0, 5f));
+
+                if (Mathf.Abs(transform.position.x - mouse.x) <= 0.2f)
+                {
+                    horizontal = Vector3.zero;
+                }
+                else if (transform.position.x < mouse.x)
+                {
+                    horizontal = Vector3.right;
+                }
+                else if (transform.position.x > mouse.x)
+                {
+                    horizontal = Vector3.left;
+                }
+            }
+            if (Input.GetMouseButtonUp(0))
             {
                 horizontal = Vector3.zero;
             }
-            else if(transform.position.x < mouse.x)
-            {
-                horizontal = Vector3.right;
-            }
-            else if (transform.position.x > mouse.x)
-            {
-                horizontal = Vector3.left;
-            }
-            transform.position = Vector3.MoveTowards(transform.position, 
-                new Vector3(mouse.x, transform.position.y, transform.position.z), slideSpeed);
-            //playerController.Move(horizontal * slideSpeed * Time.deltaTime);
+            
+
+            playerRB.velocity = new Vector3(horizontal.x * slideSpeed, playerRB.velocity.y, vertical.z * speed);
+        }
+        else
+        {
+            playerRB.velocity = Vector3.zero;
         }
     }
 
     void Anim()
     {
-        playerAnim.SetBool("isGame", isGame);
+        if (!GameControl.instance.isEnd)
+        {
+            playerAnim.SetBool("isGame", GameControl.instance.isGame);
+        }
+        else
+        {
+            playerAnim.SetBool("isGame", false);
+        }
+        
     }
+
+
 
 }

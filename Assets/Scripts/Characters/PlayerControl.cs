@@ -1,31 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : Character
 {
-    Vector3 startPos;
+    
 
-    // Start is called before the first frame update
-    void Start()
+
+    public override void Finish()
     {
-        startPos = transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            transform.position = startPos;
-            PlayerMovement.isGame = false;
-        }
+        base.Finish();
+        GameControl.instance.isGame = false;
+        GameControl.instance.isEnd = true;
     }
 
 }

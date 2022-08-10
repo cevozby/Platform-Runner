@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - Paintable
+  - HorizontalObstacle
+  - Down
+  - Rotator
+  - DoubleRotator
+  - HalfDonut
   layers:
   - Default
   - TransparentFX
@@ -13,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
